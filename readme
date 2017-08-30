@@ -1,6 +1,6 @@
 1. To install SDL on ubuntu machine:
     sudo apt-get install libsdl2-dev
 
-2. To compile:
+2. To compile main.cpp file:
     g++ main.cpp `pkg-config --cflags --libs sdl2`
 

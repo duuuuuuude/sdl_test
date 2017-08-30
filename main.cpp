@@ -18,7 +18,19 @@ int main(int argc, char *argv[]) {
         cout << "There was an error initializing the window!" << endl
              << SDL_GetError() << endl;
     }
-    SDL_Delay(5000);
+
+    // main loop
+    SDL_Event event;
+    bool running = true;
+    
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                running = false;
+                break;
+            }
+        }
+    }
 
     SDL_DestroyWindow(window);
     SDL_Quit();
