@@ -6,23 +6,24 @@ using namespace std;
 int main(int argc, char *argv[]) {
     SDL_Init(SDL_INIT_EVERYTHING);
 
-    SDL_Window *window;
+    SDL_Window *window = NULL;
 
     window = SDL_CreateWindow("Hello!",
                               SDL_WINDOWPOS_UNDEFINED,
                               SDL_WINDOWPOS_UNDEFINED,
-                              1440, // width
-                              900, // height
+                              1280, // width
+                              720, // height
                               SDL_WINDOW_RESIZABLE);
     if (window == NULL) {
         cout << "There was an error initializing the window!" << endl
              << SDL_GetError() << endl;
     }
 
-    // SDL_SetWindowBordered(window, SDL_FALSE);
-    // SDL_SetWindowTitle(window, "Kek");
-
-    int x, y, h, w;
+    // fill screen with white color
+    SDL_Surface* screen = SDL_GetWindowSurface(window);
+    Uint32 blue = SDL_MapRGB(screen->format, 0, 0, 255);
+    SDL_FillRect(screen, NULL, blue);
+    SDL_UpdateWindowSurface(window);
 
     // main loop
     SDL_Event event;
@@ -35,9 +36,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
         }
-        SDL_GetWindowPosition(window, &x, &y);
 
-        cout << x << ", " << y << endl;
     }
 
     SDL_DestroyWindow(window);
