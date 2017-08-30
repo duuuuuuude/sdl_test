@@ -19,6 +19,11 @@ int main(int argc, char *argv[]) {
              << SDL_GetError() << endl;
     }
 
+    // SDL_SetWindowBordered(window, SDL_FALSE);
+    // SDL_SetWindowTitle(window, "Kek");
+
+    int x, y, h, w;
+
     // main loop
     SDL_Event event;
     bool running = true;
@@ -30,6 +35,9 @@ int main(int argc, char *argv[]) {
                 break;
             }
         }
+        SDL_GetWindowPosition(window, &x, &y);
+
+        cout << x << ", " << y << endl;
     }
 
     SDL_DestroyWindow(window);
