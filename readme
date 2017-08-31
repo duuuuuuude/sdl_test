@@ -1,6 +1,44 @@
 1. To install SDL on ubuntu machine:
     sudo apt-get install libsdl2-dev
 
-2. To compile main.cpp file:
+2. Include it to main.cpp as #include "SDL.h"
+
+3. To compile main.cpp file:
     g++ main.cpp `pkg-config --cflags --libs sdl2`
+
+
+-----
+
+>What is `pkg config`?
+
+>So, how the SDL "main loop" works?
+First, the guy looks at the API docs: API by category->Input events->event handling. 
+From there, we read that in sdl all the events waiting to be handled are located in an event queue. 
+Using SDL_PollEvent(returns 1 if there is pending event), SDL_PeepEvents() and SDL_WaitEvent() 
+we can observe and handle waiting input events. Thus, main game (event) loop looks smth like this:
+
+while (1) {
+     SDL_Event event;
+     while(SDL_PollEvent(&event)) {
+          // handle your events here
+     }
+     // do some other stuff here -- draw your app, etc
+}
+
+>How colors are stored in SDL?
+As Uint32.
+To create color use this function: 
+Uint32 SDL_MapRGB(const SDL_PixelFormat* format, Uint8 r, Uint8 g, Uint8 b);
+
+>What is SDL_PixelFormat?
+
+>How to change the surface color?
+SDL_FillRect(screen, NULL, white);... but, don't forget to UPDATE the screen. If you change color 
+but don't update screen, no visible changes will take place!
+
+>why i don't see any changes when I change rect color?
+Use update() function: int SDL_UpdateWindowSurface(SDL_Window* window); this function is equivalent 
+to the SDL's 1.2 SDL_Flip()
+
+>Limiting frames per second
 
